@@ -22,7 +22,7 @@ Usage
 
  ```
  [
-     'class' => 'app\components\rest\UrlRule',
+     'class' => 'fproject\rest\UrlRule',
      'controller' => 'user',
  ]
  ```
