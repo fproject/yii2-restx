@@ -1,0 +1,26 @@
+{
+    "name": "fproject/yii2-giix",
+    "description": "Extended Gii for Yii 2 Framework",
+    "keywords": ["yii2", "gii", "crud"],
+    "homepage": "https://github.com/fproject/yii2-giix",
+    "type": "yii2-extension",
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Bui Sy Nguyen",
+            "email": "nguyenbs@projectkit.net",
+            "homepage": "http://f-project.net"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "fproject\\giix\\": ""
+        }
+    },
+    "extra": {
+        "bootstrap": "fproject\\giix\\Bootstrap"
+    },    
+    "require": {
+        "yiisoft/yii2-gii": "~2.0.1"
+    }
+}
