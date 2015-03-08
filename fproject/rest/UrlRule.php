@@ -9,9 +9,6 @@
 namespace fproject\rest;
 
 use Yii;
-use yii\base\InvalidConfigException;
-use yii\helpers\Inflector;
-use yii\web\CompositeUrlRule;
 
 /**
  * UrlRule is provided to simplify the creation of URL rules for RESTful API support.
