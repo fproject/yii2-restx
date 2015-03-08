@@ -6,7 +6,7 @@
 // © Copyright f-project.net 2015. All Rights Reserved.
 //
 ///////////////////////////////////////////////////////////////////////////////
-namespace app\components\rest;
+namespace fproject\rest;
 
 use Yii;
 use yii\base\InvalidConfigException;

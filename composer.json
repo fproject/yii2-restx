@@ -1,8 +1,8 @@
 {
-    "name": "fproject/yii2-giix",
-    "description": "Extended Gii for Yii 2 Framework",
-    "keywords": ["yii2", "gii", "crud"],
-    "homepage": "https://github.com/fproject/yii2-giix",
+    "name": "fproject/yii2-restx",
+    "description": "Extended RESTful for Yii2 Framework",
+    "keywords": ["yii2", "restx", "rest", "RESTful"],
+    "homepage": "https://github.com/fproject/yii2-restx",
     "type": "yii2-extension",
     "license": "BSD-3-Clause",
     "authors": [
@@ -14,13 +14,10 @@
     ],
     "autoload": {
         "psr-4": {
-            "fproject\\giix\\": ""
+            "fproject\\": ""
         }
     },
-    "extra": {
-        "bootstrap": "fproject\\giix\\Bootstrap"
-    },    
     "require": {
-        "yiisoft/yii2-gii": "~2.0.1"
+        "yiisoft/yii2": "*"
     }
 }

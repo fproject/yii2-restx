@@ -7,7 +7,7 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-namespace app\components\rest;
+namespace fproject\rest;
 
 use app\components\DbHelper;
 use Yii;
@@ -20,7 +20,7 @@ use yii\rest\Action;
  *
  * @author Bui Sy Nguyen <nguyenbs@f-project.net>
  */
-class BatchRemoveAction extends Action
+class BatchSaveAction extends Action
 {
     /**
      * @var string the scenario to be assigned to the model before it is validated and updated.
@@ -34,12 +34,18 @@ class BatchRemoveAction extends Action
      */
     public function run()
     {
-        $ids = Yii::$app->getRequest()->getBodyParams();
-        /* @var $modelCls ActiveRecord */
-        $modelCls = new $this->modelClass;
-        $pks = $modelCls::primaryKey();
-        $condition = [];
-        $condition[implode(',',$pks)] = $ids;
-        return $modelCls::deleteAll($condition);
+        $modelArr = Yii::$app->getRequest()->getBodyParams();
+        $models = [];
+        foreach($modelArr as $ma)
+        {
+            /* @var $model ActiveRecord */
+            $model = new $this->modelClass([
+                'scenario' => $this->scenario,
+            ]);
+            $model->setAttributes($ma, false);
+            $models[] = $model;
+        }
+
+        return DbHelper::batchSave($models);
     }
 }

@@ -6,7 +6,7 @@
 // © Copyright f-project.net 2015. All Rights Reserved.
 //
 ///////////////////////////////////////////////////////////////////////////////
-namespace app\components;
+namespace fproject;
 use Yii;
 use yii\db\Connection;
 use stdClass;

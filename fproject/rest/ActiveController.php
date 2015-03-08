@@ -31,7 +31,7 @@
  *
  * @author Bui Sy Nguyen <nguyenbs@f-project.net>
  */
-namespace app\components\rest;
+namespace fproject\rest;
 
 
 use yii\base\Model;
@@ -57,19 +57,19 @@ class ActiveController extends \yii\rest\ActiveController
     {
         return array_merge(parent::actions(),[
             'save' => [
-                'class' => 'app\components\rest\SaveAction',
+                'class' => 'fproject\rest\SaveAction',
                 'modelClass' => $this->modelClass,
                 'checkAccess' => [$this, 'checkAccess'],
                 'scenario' => $this->saveScenario,
             ],
             'batch-save' => [
-                'class' => 'app\components\rest\BatchSaveAction',
+                'class' => 'fproject\rest\BatchSaveAction',
                 'modelClass' => $this->modelClass,
                 'checkAccess' => [$this, 'checkAccess'],
                 'scenario' => $this->batchSaveScenario,
             ],
             'batch-remove' => [
-                'class' => 'app\components\rest\BatchRemoveAction',
+                'class' => 'fproject\rest\BatchRemoveAction',
                 'modelClass' => $this->modelClass,
                 'checkAccess' => [$this, 'checkAccess'],
             ],
