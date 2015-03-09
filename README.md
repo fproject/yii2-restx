@@ -21,12 +21,12 @@ By default, the following actions are supported:
 - `save`: save (update or insert) a model
 - `batchSave`: batch-save (update or insert) models
 - `batchDelete`: batch-delete existing models
-You may disable some of these actions by overriding [[actions()]] and unsetting the corresponding actions.
+You may disable some of these actions by overriding {{actions()}} and unsetting the corresponding actions.
 
-To add a new action, either override [[actions()]] by appending a new action class or write a new action method.
-Make sure you also override [[verbs()]] to properly declare what HTTP methods are allowed by the new action.
+To add a new action, either override {{actions()}} by appending a new action class or write a new action method.
+Make sure you also override {{verbs()}} to properly declare what HTTP methods are allowed by the new action.
 
-You should usually override [[checkAccess()]] to check whether the current user has the privilege to perform
+You should usually override {{checkAccess()}} to check whether the current user has the privilege to perform
 the specified action against the specified model.
 
 Installation
