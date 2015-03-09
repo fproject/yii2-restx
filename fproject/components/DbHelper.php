@@ -56,7 +56,6 @@ class DbHelper
         $pkMarks=[];
         $updateModels=[];
         $insertModels = [];
-        Yii::trace(var_export($models,true));
         foreach ($models as $model)
         {
             if(!isset($tableSchema))
@@ -80,7 +79,6 @@ class DbHelper
                 {
                     $inserting = false;
                     $pks = $model->getPrimaryKey(true);
-                    Yii::trace($pks);
                     foreach($pks as $pkName=>$pkValue)
                     {
                         $pkMarks[$pkName] = true;
