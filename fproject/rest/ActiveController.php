@@ -55,7 +55,7 @@ class ActiveController extends \yii\rest\ActiveController
      */
     public function actions()
     {
-        return array_merge(parent::actions(),[
+        $actions = array_merge(parent::actions(),[
             'save' => [
                 'class' => 'fproject\rest\SaveAction',
                 'modelClass' => $this->modelClass,
@@ -74,6 +74,15 @@ class ActiveController extends \yii\rest\ActiveController
                 'checkAccess' => [$this, 'checkAccess'],
             ],
         ]);
+
+        //Override 'index' action
+        $actions['index'] = [
+            'class' => 'fproject\rest\IndexAction',
+            'modelClass' => $this->modelClass,
+            'checkAccess' => [$this, 'checkAccess']
+        ];
+
+        return $actions;
     }
 
     /**
