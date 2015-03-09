@@ -12,7 +12,7 @@ It also provides fproject\rest\UrlRule to config URL rule for active controllers
 
 By default, the following actions are supported:
 
-- `index`: list of models
+- `index`: list of models. Support query criteria, pagination and sorting.
 - `view`: return the details of a model
 - `create`: create a new model
 - `update`: update an existing model
