@@ -28,7 +28,7 @@ class IndexAction extends \yii\rest\IndexAction{
             $criteria = Json::decode($urlParams['criteria']);
             if(is_array($criteria) && isset($criteria['condition']))
             {
-                $params = isset($criteria['params']) ? $criteria['params'] : [];
+                $params = is_array($criteria['params']) ? $criteria['params'] : [];
 
                 /** @var ActiveQuery $query */
                 $query = Yii::createObject(ActiveQuery::className(), [$this->modelClass]);
