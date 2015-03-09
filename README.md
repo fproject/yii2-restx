@@ -1,7 +1,7 @@
 yii2-restx
 ===========
 
-Extended RESTful for Yii2 Framework
+Extended Yii2 Framework RESTful for F-Project server sites 
 
 
 What is it?
