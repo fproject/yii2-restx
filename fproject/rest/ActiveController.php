@@ -90,9 +90,14 @@ class ActiveController extends \yii\rest\ActiveController
      */
     protected function verbs()
     {
-        return array_merge(parent::verbs(),[
+        $verbs = array_merge(parent::verbs(),[
             'save' => ['POST'],
             'batch-save' => ['POST'],
         ]);
+
+        //Override 'delete' verbs
+        $verbs['delete'] = ['GET','DELETE'];
+
+        return $verbs;
     }
 }

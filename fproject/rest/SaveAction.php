@@ -62,6 +62,6 @@ class SaveAction extends Action
             throw new ServerErrorHttpException('Failed to save the object for unknown reason.');
         }
 
-        return $model;
+        return $model->getPrimaryKey();
     }
 }
