@@ -46,7 +46,7 @@ Usage
  ]
  ```
 
-- Let your controller extends fproject\rest\ActiveController instead of yii\rest\ActiveController
+- Let your controller extends _fproject\rest\ActiveController_ instead of _yii\rest\ActiveController_
  ```
  class UserController extends \fproject\rest\ActiveController{
     public $modelClass = 'app\models\User';
