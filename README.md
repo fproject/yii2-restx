@@ -40,10 +40,13 @@ Usage
 -----
 - In your Yii configuration file, use _fproject\rest\UrlRule_ instead of _yii\rest\UrlRule_
  ```
- [
-     'class' => 'fproject\rest\UrlRule',
-     'controller' => 'user',
- ]
+ 'urlManager' => [
+            'enablePrettyUrl' => true,
+            'enableStrictParsing' => true,
+            'rules' => [
+                ['class' => 'fproject\rest\UrlRule', 'controller' => 'user'],
+            ],
+        ]
  ```
 
 - Let your controller extends _fproject\rest\ActiveController_ instead of _yii\rest\ActiveController_
