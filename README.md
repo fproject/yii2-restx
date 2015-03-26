@@ -38,13 +38,24 @@ The preferred way to install this extension is through [composer](http://getcomp
 
 Usage
 -----
+- In your Yii configuration file, use _fproject\rest\UrlRule_ instead of _yii\rest\UrlRule_
+ ```
+ 'urlManager' => [
+            'enablePrettyUrl' => true,
+            'enableStrictParsing' => true,
+            'rules' => [
+                ['class' => 'fproject\rest\UrlRule', 'controller' => 'user'],
+            ],
+        ]
+ ```
 
+- Let your controller extends _fproject\rest\ActiveController_ instead of _yii\rest\ActiveController_
  ```
- [
-     'class' => 'fproject\rest\UrlRule',
-     'controller' => 'user',
- ]
+ class UserController extends \fproject\rest\ActiveController{
+    public $modelClass = 'app\models\User';
+ }
  ```
+ 
  
 Links
 -----
