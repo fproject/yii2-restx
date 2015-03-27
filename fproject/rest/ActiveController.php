@@ -39,6 +39,14 @@ use yii\base\Model;
 class ActiveController extends \yii\rest\ActiveController
 {
     /**
+     * @inheritdoc
+     */
+    public $serializer = [
+        'class' => 'yii\rest\Serializer',
+        'collectionEnvelope' => 'items',
+    ];
+
+    /**
      * @var string the scenario used for saving a model.
      * @see \yii\base\Model::scenarios()
      */
