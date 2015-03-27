@@ -105,7 +105,8 @@ class DbHelper
 
         if(count($updateModels) > 0)
         {
-            $retObj->updateCount = self::updateMultiple($tableSchema->name, $updateModels, array_keys($pkMarks));
+            self::updateMultiple($tableSchema->name, $updateModels, array_keys($pkMarks));
+            $retObj->updateCount = count($updateModels);
         }
         if(count($insertModels) > 0)
         {
