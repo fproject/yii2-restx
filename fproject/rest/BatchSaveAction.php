@@ -22,6 +22,8 @@ use yii\rest\Action;
  */
 class BatchSaveAction extends Action
 {
+    use SaveActionTrait;
+
     /**
      * @var string the scenario to be assigned to the model before it is validated and updated.
      */
@@ -46,6 +48,10 @@ class BatchSaveAction extends Action
             $models[] = $model;
         }
 
-        return DbHelper::batchSave($models);
+        $attributes = $this->getSavingFieldsFromRequest();
+        if(is_null($attributes))
+            $attributes = [];
+
+        return DbHelper::batchSave($models, $attributes);
     }
 }

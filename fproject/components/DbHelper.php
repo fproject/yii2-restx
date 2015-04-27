@@ -37,7 +37,7 @@ class DbHelper
      * amount of data to the database table.
      * @param \yii\db\ActiveRecord[] $models list of models to be saved.
      * If a key is not a valid column name, the corresponding value will be ignored.
-     * @param array $attributeNames name list of attributes that need to be update. Defaults to null,
+     * @param array $attributeNames name list of attributes that need to be update. Defaults to empty,
      * meaning all fields of corresponding active record will be saved.
      * This parameter is ignored in the case of insertion
      * @param int $mode the save mode flag.

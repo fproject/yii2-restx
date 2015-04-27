@@ -9,6 +9,7 @@
 
 namespace fproject\rest;
 
+use fproject\components\DbHelper;
 use Yii;
 use yii\base\Model;
 use yii\db\ActiveRecord;
@@ -22,6 +23,7 @@ use yii\web\ServerErrorHttpException;
  */
 class SaveAction extends Action
 {
+    use SaveActionTrait;
     /**
      * @var string the scenario to be assigned to the model before it is validated and updated.
      */
@@ -40,25 +42,46 @@ class SaveAction extends Action
             'scenario' => $this->scenario,
         ]);
 
-        $model->load(Yii::$app->getRequest()->getBodyParams(), '');
-        $keys = $model->getPrimaryKey(true);
-        $isNew = true;
-        foreach($keys as $name=>$value)
+        $bodyData = Yii::$app->getRequest()->getBodyParams();
+
+        $attributes = $this->getSavingFieldsFromRequest();
+
+        if(isset($attributes))
         {
-            if(isset($value))
+            $data = [];
+            foreach($attributes as $name)
             {
-                $isNew = false;
-                break;
+                $data[$name] = $bodyData[$name];
             }
         }
+        else
+            $data = $bodyData;
+        $model->load($data, '');
 
-        $model->setIsNewRecord($isNew);
+        $keys = $model->getPrimaryKey(true);
+
+        $isNew = false;
+        foreach($keys as $name=>$value)
+        {
+            if(isset($bodyData[$name]))
+            {
+                $model->$name = $bodyData[$name];
+                $keys[$name] = $bodyData[$name];
+            }
+            else
+                $isNew = true;
+        }
+
+        if($isNew)
+            $model->setOldAttributes(null);
+        else
+            $model->setOldAttributes($keys);
 
         if ($this->checkAccess) {
             call_user_func($this->checkAccess, $this->id, $model);
         }
 
-        if ($model->save() === false && !$model->hasErrors()) {
+        if ($model->save(true, $attributes) === false && !$model->hasErrors()) {
             throw new ServerErrorHttpException('Failed to save the object for unknown reason.');
         }
 
