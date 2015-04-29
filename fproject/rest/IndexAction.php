@@ -36,9 +36,22 @@ class IndexAction extends \yii\rest\IndexAction{
                     $query = Yii::createObject(ActiveQuery::className(), [$this->modelClass]);
                     $query->where($criteria['condition'], $params);
                     $dp->query = $query;
+                    if(isset($criteria['pagination']) && is_array($criteria['pagination']))
+                    {
+                        $dp->setPagination([
+                            'params'=> array_merge($urlParams, $criteria['pagination'])
+                        ]);
+                    }
+                    if(isset($criteria['sort']))
+                    {
+                        $dp->setSort([
+                            'params'=> array_merge($urlParams, ['sort' => $criteria['sort']])
+                        ]);
+                        $sortEnabled = true;
+                    }
                 }
             }
-            if(isset($urlParams['sort']))
+            if(isset($sortEnabled) || isset($urlParams['sort']))
             {
                 $dp->getSort()->enableMultiSort = true;
             }
