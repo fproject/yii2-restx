@@ -9,7 +9,7 @@ What is it?
 
 #### ActiveController
 
-Yii2-restx provides provides a class fproject\rest\ActiveController which extends yii\rest\ActiveController with
+Yii2-restx provides provides class `fproject\rest\ActiveController` which extends yii\rest\ActiveController with
 additional REST endpoints and methods in order to work with F-Project framework Flex clients.
 
 By default, the following actions are supported:
@@ -24,17 +24,17 @@ By default, the following actions are supported:
 - `batch-save`: batch-save (update or insert) models
 - `batch-remove`: batch-delete existing models
 
-You may disable some of these actions by overriding {{actions()}} and unsetting the corresponding actions.
+You may disable some of these actions by overriding `actions()` and unsetting the corresponding actions.
 
-To add a new action, either override {{actions()}} by appending a new action class or write a new action method.
-Make sure you also override {{verbs()}} to properly declare what HTTP methods are allowed by the new action.
+To add a new action, either override `actions()` by appending a new action class or write a new action method.
+Make sure you also override `verbs()` to properly declare what HTTP methods are allowed by the new action.
 
-You should usually override {{checkAccess()}} to check whether the current user has the privilege to perform
+You should usually override `checkAccess()` to check whether the current user has the privilege to perform
 the specified action against the specified model.
 
 #### UrlRule
 
-Yii2-RESTx also provides fproject\rest\UrlRule to config URL rule for active controllers to accept extended routes.
+Yii2-RESTx also provides class `fproject\rest\UrlRule` to config URL rule for active controllers to accept extended routes.
 
 Class UrlRule is provided to simplify the creation of URL rules for RESTful API support.
 
