@@ -52,10 +52,11 @@ The above code will create a whole set of URL rules supporting the following RES
 - `'PUT,PATCH users/<id>' => 'user/update'`: update a user
 - `'DELETE users/<id>' => 'user/delete'`: delete a user
 - `'GET users/remove/<id>' => 'user/delete'`: delete a user
+- `'POST users/batch-remove' => 'user/batch-remove'`: batch-remove an array of users
 - `'GET,HEAD users/<id>' => 'user/view'`: return the details/overview/options of a user
 - `'POST users' => 'user/create'`: create a new user
 - `'POST users/save' => 'user/save'`: save a user
-- `'POST users/batch-save' => 'user/batchSave'`: save a user
+- `'POST users/batch-save' => 'user/batch-save'`: save a user
 - `'GET,HEAD users' => 'user/index'`: return a list/overview/options of users
 - `'users/<id>' => 'user/options'`: process all unhandled verbs of a user
 - `'users' => 'user/options'`: process all unhandled verbs of user collection
