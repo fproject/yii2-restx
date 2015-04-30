@@ -32,7 +32,9 @@ Make sure you also override {{verbs()}} to properly declare what HTTP methods ar
 You should usually override {{checkAccess()}} to check whether the current user has the privilege to perform
 the specified action against the specified model.
 
-It also provides fproject\rest\UrlRule to config URL rule for active controllers to accept extended routes.
+#### UrlRule
+
+Yii2-RESTx also provides fproject\rest\UrlRule to config URL rule for active controllers to accept extended routes.
 
 Class UrlRule is provided to simplify the creation of URL rules for RESTful API support.
 
@@ -40,7 +42,7 @@ The simplest usage of UrlRule is to declare a rule like the following in the app
 
 ```php
 [
-    'class' => 'app\components\rest\UrlRule',
+    'class' => 'fproject\rest\UrlRule',
     'controller' => 'user',
 ]
 ```
@@ -65,7 +67,7 @@ For example, the following code will disable the `delete` rule and generate rule
 
 ```php
 [
-    'class' => 'app\components\rest\UrlRule',
+    'class' => 'fproject\rest\UrlRule',
     'controller' => ['user', 'post'],
     'except' => ['delete'],
 ]

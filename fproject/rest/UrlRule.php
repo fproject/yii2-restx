@@ -17,7 +17,7 @@ use Yii;
  *
  * ```php
  * [
- *     'class' => 'app\components\rest\UrlRule',
+ *     'class' => 'fproject\rest\UrlRule',
  *     'controller' => 'user',
  * ]
  * ```
@@ -26,9 +26,11 @@ use Yii;
  *
  * - `'PUT,PATCH users/<id>' => 'user/update'`: update a user
  * - `'DELETE users/<id>' => 'user/delete'`: delete a user
+ * - `'GET users/remove/<id>' => 'user/delete'`: delete a user
  * - `'GET,HEAD users/<id>' => 'user/view'`: return the details/overview/options of a user
  * - `'POST users' => 'user/create'`: create a new user
  * - `'POST users/save' => 'user/save'`: save a user
+ * - `'POST users/batch-save' => 'user/batchSave'`: save a user
  * - `'GET,HEAD users' => 'user/index'`: return a list/overview/options of users
  * - `'users/<id>' => 'user/options'`: process all unhandled verbs of a user
  * - `'users' => 'user/options'`: process all unhandled verbs of user collection
@@ -40,7 +42,7 @@ use Yii;
  *
  * ```php
  * [
- *     'class' => 'app\components\rest\UrlRule',
+ *     'class' => 'fproject\rest\UrlRule',
  *     'controller' => ['user', 'post'],
  *     'except' => ['delete'],
  * ]
