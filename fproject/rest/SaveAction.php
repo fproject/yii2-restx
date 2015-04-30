@@ -9,7 +9,6 @@
 
 namespace fproject\rest;
 
-use fproject\components\DbHelper;
 use Yii;
 use yii\base\Model;
 use yii\db\ActiveRecord;
