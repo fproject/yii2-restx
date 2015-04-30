@@ -7,7 +7,7 @@ Extended Yii2 Framework RESTful for F-Project server sites
 What is it?
 -----------
 
-h3. ActiveController
+#### ActiveController
 
 Yii2-restx provides provides a class fproject\rest\ActiveController which extends yii\rest\ActiveController with
 additional REST endpoints and methods in order to work with F-Project framework Flex clients.
