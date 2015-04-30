@@ -61,9 +61,9 @@ The above code will create a whole set of URL rules supporting the following RES
 - `'users/<id>' => 'user/options'`: process all unhandled verbs of a user
 - `'users' => 'user/options'`: process all unhandled verbs of user collection
 
-You may configure [[only]] and/or [[except]] to disable some of the above rules.
-You may configure [[patterns]] to completely redefine your own list of rules.
-You may configure [[controller]] with multiple controller IDs to generate rules for all these controllers.
+You may configure `only` and/or `except` to disable some of the above rules.
+You may configure `patterns` to completely redefine your own list of rules.
+You may configure `controller` with multiple controller IDs to generate rules for all these controllers.
 For example, the following code will disable the `delete` rule and generate rules for both `user` and `post` controllers:
 
 ```php
@@ -74,7 +74,7 @@ For example, the following code will disable the `delete` rule and generate rule
 ]
 ```
 
-The property [[controller]] is required and should represent one or multiple controller IDs.
+The property `controller` is required and should represent one or multiple controller IDs.
 Each controller ID should be prefixed with the module ID if the controller is within a module.
 The controller ID used in the pattern will be automatically pluralized (e.g. `user` becomes `users`
 as shown in the above examples).
