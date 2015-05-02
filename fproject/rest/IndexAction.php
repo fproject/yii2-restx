@@ -38,8 +38,11 @@ class IndexAction extends \yii\rest\IndexAction{
                     $dp->query = $query;
                     if(isset($criteria['pagination']) && is_array($criteria['pagination']))
                     {
+                        $pagination = $criteria['pagination'];
+                        if(!isset($pagination['per-page']) && isset($pagination['perPage']))
+                            $pagination['per-page'] = $pagination['perPage'];
                         $dp->setPagination([
-                            'params'=> array_merge($urlParams, $criteria['pagination'])
+                            'params'=> array_merge($urlParams, $pagination)
                         ]);
                     }
                     if(isset($criteria['sort']))
@@ -56,6 +59,8 @@ class IndexAction extends \yii\rest\IndexAction{
                 $dp->getSort()->enableMultiSort = true;
             }
         }
+
+        Yii::trace(var_export($dp->pagination, true));
 
         return $dp;
     }
