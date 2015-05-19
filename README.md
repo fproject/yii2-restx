@@ -10,7 +10,7 @@ What is it?
 
 #### ActiveController
 
-Yii2-restx provides provides class `fproject\rest\ActiveController` which extends yii\rest\ActiveController with
+Yii2-restx provides class `fproject\rest\ActiveController` which extends yii\rest\ActiveController with
 additional REST endpoints and methods in order to work with F-Project framework Flex clients.
 
 By default, the following actions are supported:
