@@ -3,6 +3,7 @@ yii2-restx
 
 Extended Yii2 Framework RESTful for F-Project server sites 
 
+[![Latest Stable Version](https://poser.pugx.org/fproject/yii2-restx/v/stable)](https://packagist.org/packages/fproject/yii2-restx) [![Total Downloads](https://poser.pugx.org/fproject/yii2-restx/downloads)](https://packagist.org/packages/fproject/yii2-restx) [![Latest Unstable Version](https://poser.pugx.org/fproject/yii2-restx/v/unstable)](https://packagist.org/packages/fproject/yii2-restx) [![License](https://poser.pugx.org/fproject/yii2-restx/license)](https://packagist.org/packages/fproject/yii2-restx)
 
 What is it?
 -----------
