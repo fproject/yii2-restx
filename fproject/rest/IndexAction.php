@@ -60,8 +60,6 @@ class IndexAction extends \yii\rest\IndexAction{
             }
         }
 
-        Yii::trace(var_export($dp->pagination, true));
-
         return $dp;
     }
 }
