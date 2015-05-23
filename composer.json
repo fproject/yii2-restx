@@ -4,20 +4,34 @@
     "keywords": ["yii2", "restx", "rest", "RESTful"],
     "homepage": "https://github.com/fproject/yii2-restx",
     "type": "yii2-extension",
-    "license": "BSD-3-Clause",
+    "license": "Apache License 2.0",
+    "support" : {
+      "issues" : "https://github.com/fproject/yii2-restx/issues"
+    },
     "authors": [
         {
             "name": "Bui Sy Nguyen",
-            "email": "nguyenbs@projectkit.net",
+            "email": "nguyenbs@f-project.net",
             "homepage": "http://f-project.net"
         }
     ],
+    "minimum-stability" : "stable",
+    "require" : {
+      "php" : ">=5.4.0",
+      "yiisoft/yii2" : "*"
+    },
+    "require-dev" : {
+      "codeception/codeception" : "2.0.9",
+      "codeception/specify" : "*",
+      "codeception/verify" : "*",
+      "yiisoft/yii2-codeception" : "*"
+    },
+    "config" : {
+      "process-timeout" : 1800
+    },
     "autoload": {
         "psr-4": {
             "fproject\\": "fproject/"
         }
-    },
-    "require": {
-        "yiisoft/yii2": "*"
     }
 }
