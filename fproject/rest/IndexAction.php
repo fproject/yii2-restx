@@ -9,7 +9,6 @@
 namespace fproject\rest;
 
 use Yii;
-use yii\data\Sort;
 use yii\db\ActiveQuery;
 use yii\helpers\Json;
 
