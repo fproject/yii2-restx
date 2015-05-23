@@ -13,7 +13,10 @@ class ActiveControllerTest extends TestCase
     public function testActions001()
     {
     	$this->specify('check ActiveControllerTest\'s actions', function () {
-    		$controller = new ActiveController('user', Yii::$app);
+    		$controller = new ActiveController('user', Yii::$app,
+                [
+                    'modelClass' => 'tests\unit\models\User'
+                ]);
     		expect("controller id should be 'user'", $controller->id == 'user' )->true();
     	});
     }
