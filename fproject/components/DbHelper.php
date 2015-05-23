@@ -103,12 +103,12 @@ class DbHelper
 
         $retObj = new stdClass();
 
-        if(count($updateModels) > 0)
+        if(count($updateModels) > 0 && isset($tableSchema))
         {
             self::updateMultiple($tableSchema->name, $updateModels, array_keys($pkMarks));
             $retObj->updateCount = count($updateModels);
         }
-        if(count($insertModels) > 0)
+        if(count($insertModels) > 0 && isset($tableSchema))
         {
             $retObj->insertCount = self::insertMultiple($tableSchema->name, $insertModels);
             $id = self::db()->getLastInsertID($tableSchema->sequenceName);
