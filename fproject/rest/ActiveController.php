@@ -72,6 +72,25 @@ class ActiveController extends \yii\rest\ActiveController
     public $batchSaveScenario = Model::SCENARIO_DEFAULT;
 
     /**
+     * @var bool User secure searching condition. This will prevent client request directly
+     * use WHERE condition as the request param to filter searching result.
+     */
+    public $useSecureSearch = true;
+
+    /**
+     * @var array The condition map contains pre-defined SQL conditions and expand (relation) definition for client query
+     * For example:
+     * [
+     *    'findByUser_condition'=>'name LIKE :userName',
+     *    'findByUser_expand_resource'=>['select'=>false,'condition'=>'resource.userId=:userId'],
+     * ]
+     * The conditionMap also can be created by inline function.
+     *
+     * This field is ignored if the $useSecureSearch is set to false.
+     */
+    public $conditionMap = [];
+
+    /**
      * @inheritdoc
      */
     public function actions()

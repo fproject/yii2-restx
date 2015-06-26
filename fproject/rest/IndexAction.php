@@ -26,6 +26,8 @@ use yii\helpers\Json;
 /**
  * BatchSaveAction implements the API endpoint for viewing (listing) model(s).
  *
+ * @property ActiveController $controller
+ *
  * @author Bui Sy Nguyen <nguyenbs@f-project.net>
  */
 class IndexAction extends \yii\rest\IndexAction{
@@ -38,14 +40,53 @@ class IndexAction extends \yii\rest\IndexAction{
             if(isset($urlParams['criteria']))
             {
                 $criteria = Json::decode($urlParams['criteria']);
-                if(is_array($criteria) && isset($criteria['condition']))
-                {
-                    $params = isset($criteria['params']) && is_array($criteria['params']) ? $criteria['params'] : [];
+                $params = $this->getParams($criteria);
 
+                if(isset($this->controller) && $this->controller->useSecureSearch)
+                {
+                    $conditionKeys = $this->getConditionKeys($criteria);
+                    if(isset($conditionKeys))
+                    {
+                        $c = $this->getConditionMapItem($conditionKeys, $params);
+                        if(isset($c))
+                        {
+                            /** @var ActiveQuery $query */
+                            if($c instanceof ActiveQuery)
+                            {
+                                $query = $c;
+                            }
+                            else
+                            {
+                                $query = Yii::createObject(ActiveQuery::className(), [$this->controller->modelClass]);
+                                if(isset($c['condition']) || isset($c['with']) || isset($c['expand']))
+                                {
+                                    if(isset($c['condition']))
+                                        $query->where($c['condition'], $params);
+                                    if(isset($c['with']))
+                                        $with = $c['with'];
+                                    if(isset($c['expand']))
+                                        $with = $c['expand'];
+
+                                    if(isset($with))
+                                        $query->with($with);
+                                }
+                                else
+                                {
+                                    $query->where($c, $params);
+                                }
+                            }
+                        }
+                    }
+                }
+                elseif(is_array($criteria) && isset($criteria['condition']))
+                {
                     /** @var ActiveQuery $query */
                     $query = Yii::createObject(ActiveQuery::className(), [$this->modelClass]);
                     $query->where($criteria['condition'], $params);
-                    $dp->query = $query;
+                }
+
+                if(is_array($criteria))
+                {
                     if(isset($criteria['pagination']) && is_array($criteria['pagination']))
                     {
                         $pagination = $criteria['pagination'];
@@ -60,16 +101,78 @@ class IndexAction extends \yii\rest\IndexAction{
                         $dp->setSort([
                             'params'=> array_merge($urlParams, ['sort' => $criteria['sort']])
                         ]);
-                        $sortEnabled = true;
+                        $sort = true;
                     }
                 }
             }
-            if(isset($sortEnabled) || isset($urlParams['sort']))
-            {
+
+            if(isset($query))
+                $dp->query = $query;
+
+            if(isset($sort) || isset($urlParams['sort']))
                 $dp->getSort()->enableMultiSort = true;
-            }
         }
 
         return $dp;
+    }
+
+    protected function getParams($source)
+    {
+        if(isset($source) && is_array($source))
+        {
+            $source = $this->convertSource($source);
+            if(isset($source['params']))
+            {
+                $params = $source['params'];
+                if(is_object($params))
+                    $params = (array)$params;
+                return $params;
+            }
+        }
+        return null;
+    }
+
+    protected function getConditionKeys($source)
+    {
+        if(isset($source) && is_array($source))
+        {
+            $source = $this->convertSource($source);
+            if(isset($source['condition']))
+            {
+                $c = $source['condition'];
+                $keys = [$c];
+                if(substr($c, -9) !== 'Condition')
+                    $keys[] = $c.'Condition';
+                return $keys;
+            }
+        }
+        return null;
+    }
+
+    protected function getConditionMapItem($keys, $params)
+    {
+        if(!is_array($keys))
+            $keys = [$keys];
+        foreach($keys as $key)
+        {
+            if(strlen($key) > 0 && $key[0] == '@')
+                $methodName = substr($key, 1);
+            if(isset($methodName) && method_exists($this->controller, $methodName))
+                return $this->controller->{$methodName}($params);
+            elseif(isset($this->controller->conditionMap[$key]))
+                return $this->controller->conditionMap[$key];
+        }
+        return null;
+    }
+
+    protected function convertSource($source)
+    {
+        if(count($source) == 1)
+        {
+            $first = reset($source);
+            if(is_object($first) || (is_array($first) && !is_string(key($source))))
+                $source = (array)$first;
+        }
+        return $source;
     }
 }
