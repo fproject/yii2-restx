@@ -64,6 +64,13 @@ class DbHelper
         Yii::trace('batchSave()','application.DbHelper');
         if(is_null($models) || empty($models))
             return null;
+
+        $model = reset($models);
+        if(method_exists($model, 'beforeBatchSave'))
+        {
+            call_user_func([$model, 'beforeBatchSave'], $models);
+        }
+
         $pkMarks=[];
         $updateModels=[];
         $insertModels = [];
@@ -127,6 +134,16 @@ class DbHelper
                 $id = $retObj->insertCount + intval($id) - 1;
             $retObj->lastId = $id;
         }
+
+        if($retObj->updateCount > 0 || $retObj->insertCount > 0)
+        {
+            $model = reset($models);
+            if(method_exists($model, 'afterBatchSave'))
+            {
+                call_user_func([$model, 'afterBatchSave'], $models);
+            }
+        }
+
         return $retObj;
     }
 
