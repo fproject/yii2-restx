@@ -123,12 +123,12 @@ class DbHelper
 
         if(count($updateModels) > 0 && isset($tableSchema))
         {
-            self::updateMultiple($tableSchema->name, $updateModels, array_keys($pkMarks));
+            self::updateMultiple($tableSchema->fullName, $updateModels, array_keys($pkMarks));
             $retObj->updateCount = count($updateModels);
         }
         if(count($insertModels) > 0 && isset($tableSchema))
         {
-            $retObj->insertCount = self::insertMultiple($tableSchema->name, $insertModels);
+            $retObj->insertCount = self::insertMultiple($tableSchema->fullName, $insertModels);
             $id = self::db()->getLastInsertID($tableSchema->sequenceName);
             if(is_numeric($id))
                 $id = $retObj->insertCount + intval($id) - 1;
