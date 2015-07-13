@@ -89,6 +89,7 @@ class DbHelper
             }
             else
             {
+                $pks = [];
                 if(property_exists($model,'_isInserting'))
                 {
                     $inserting = (bool)$model->_isInserting;
@@ -113,9 +114,18 @@ class DbHelper
                 }
 
                 if($inserting)
-                    $insertModels[] = $model->toArray($attributeNames);
+                {
+                    $data = $model->toArray($attributeNames);
+                    foreach($pks as $pkName=>$pkValue)
+                    {
+                        unset($data[$pkName]);
+                    }
+                    $insertModels[] = $data;
+                }
                 else
+                {
                     $updateModels[] = $model->toArray($attributeNames);
+                }
             }
         }
 
