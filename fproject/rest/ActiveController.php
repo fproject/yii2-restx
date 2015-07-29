@@ -72,8 +72,10 @@ class ActiveController extends \yii\rest\ActiveController
     public $batchSaveScenario = Model::SCENARIO_DEFAULT;
 
     /**
-     * @var bool User secure searching condition. This will prevent client request directly
+     * @var bool Use secure searching condition. This will prevent client request directly
      * use WHERE condition as the request param to filter searching result.
+     *
+     * This will help us prevent SQL injection vulnerability.
      */
     public $useSecureSearch = true;
 

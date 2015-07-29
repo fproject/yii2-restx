@@ -24,7 +24,7 @@ use yii\db\ActiveQuery;
 use yii\helpers\Json;
 
 /**
- * BatchSaveAction implements the API endpoint for viewing (listing) model(s).
+ * IndexAction implements the API endpoint for viewing (listing) model(s).
  *
  * @property ActiveController $controller
  *
