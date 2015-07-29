@@ -145,7 +145,7 @@ class DbHelper
             $retObj->lastId = $id;
         }
 
-        if($retObj->updateCount > 0 || $retObj->insertCount > 0)
+        if((isset($retObj->updateCount) && $retObj->updateCount > 0) || (isset($retObj->insertCount) && $retObj->insertCount > 0))
         {
             $model = reset($models);
             if(method_exists($model, 'afterBatchSave'))
