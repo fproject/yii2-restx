@@ -1,4 +1,5 @@
 # phpstorm project files
 .idea
 vendor
+/vendor
 composer.lock
