@@ -1,6 +1,6 @@
 # Running Unit tests
 
-- Navigate to the **yii2-workflow** installation folder
+- Navigate to the **yii2-restx** installation folder
 - Install composer dependencies
 
 ```
