@@ -11,7 +11,7 @@ install:
   - composer install --prefer-dist --dev
   - composer info --installed
 before_script:
-  - mysql -e 'create database workflowii_test;'
+  - mysql -e 'create database yii2_restx_test;'
   - cd tests  
   - php ./codeception/bin/yii  migrate/up --interactive=0
   - ../vendor/bin/codecept build
