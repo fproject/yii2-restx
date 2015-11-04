@@ -1,7 +1,7 @@
 <?php
 ///////////////////////////////////////////////////////////////////////////////
 //
-// © Copyright f-project.net 2010-present. All Rights Reserved.
+// © Copyright f-project.net 2010-present.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
