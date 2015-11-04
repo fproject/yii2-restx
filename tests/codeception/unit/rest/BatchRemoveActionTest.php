@@ -19,7 +19,7 @@
 namespace tests\unit\rest;
 
 use fproject\components\DbHelper;
-use tests\unit\models\User;
+use tests\codeception\unit\models\User;
 use fproject\rest\BatchRemoveAction;
 use Yii;
 use yii\codeception\TestCase;
