@@ -8,7 +8,7 @@ php:
 install:
   - composer self-update
   - composer install --prefer-dist --dev
-  - composer info --installed
+  - composer update
 before_script:
   - mysql -e 'create database yii2_restx_test;'
   - cd tests  
