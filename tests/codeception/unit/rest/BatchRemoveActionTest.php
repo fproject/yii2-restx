@@ -31,22 +31,13 @@ class BatchRemoveActionTest extends TestCase
     public function testBatchRemoveForSinglePrimaryKey()
     {
         $users = [];
-        for($i=0; $i < 5; $i++)
+        $ids = [];
+        for($i=0; $i < 3; $i++)
         {
             $user = new User();
             $user->username = "User testBatchRemoveForSinglePrimaryKey $i";
             $user->password = "Password testBatchRemoveForSinglePrimaryKey $i";
-            $users[] = $user;
-        }
-
-        $returnModels = [];
-        DbHelper::batchSave($users, [], DbHelper::SAVE_MODE_INSERT_ALL, $returnModels);
-
-        $ids = [];
-        for($i=0; $i < 5; $i++)
-        {
-            /** @var User $user */
-            $user =$returnModels[$i];
+            $user->save(false);
             $ids[] = $user->id;
         }
 
