@@ -18,7 +18,8 @@
 ///////////////////////////////////////////////////////////////////////////////
 namespace tests\unit\rest;
 
-use fproject\rest\ActiveController;
+use fproject\components\DbHelper;
+use tests\unit\models\User;
 use fproject\rest\BatchRemoveAction;
 use Yii;
 use yii\codeception\TestCase;
@@ -29,12 +30,32 @@ class BatchRemoveActionTest extends TestCase
 
     public function testBatchRemoveForSinglePrimaryKey()
     {
-        Yii::$app->request->setBodyParams([1,2]);
+        $users = [];
+        for($i=0; $i < 5; $i++)
+        {
+            $user = new User();
+            $user->username = "User testBatchRemoveForSinglePrimaryKey $i";
+            $user->password = "Password testBatchRemoveForSinglePrimaryKey $i";
+            $users[] = $user;
+        }
+
+        $returnModels = [];
+        DbHelper::batchSave($users, [], DbHelper::SAVE_MODE_INSERT_ALL, $returnModels);
+
+        $ids = [];
+        for($i=0; $i < 5; $i++)
+        {
+            /** @var User $user */
+            $user =$returnModels[$i];
+            $ids[] = $user->id;
+        }
+
+        Yii::$app->request->setBodyParams($ids);
 
     	$this->specify('Remove a AR with single primary key', function () {
     		$action = new BatchRemoveAction("batch-remove", null, ['modelClass'=>'tests\unit\models\User']);
             $i = $action->run();
-    		expect("Number of deleted records should be 2: ", $i == 2)->true();
+    		expect("Number of deleted records should be 2: ", $i == 5)->true();
     	});
     }
 }
