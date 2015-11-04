@@ -19,21 +19,22 @@
 namespace tests\unit\rest;
 
 use fproject\rest\ActiveController;
+use fproject\rest\BatchRemoveAction;
 use Yii;
 use yii\codeception\TestCase;
 
-class ActiveControllerTest extends TestCase
+class BatchRemoveActionTest extends TestCase
 {
 	use \Codeception\Specify;
 
-    public function testActions001()
+    public function testBatchRemoveForSinglePrimaryKey()
     {
-    	$this->specify('check ActiveControllerTest\'s actions', function () {
-    		$controller = new ActiveController('user', Yii::$app,
-                [
-                    'modelClass' => 'tests\unit\models\User'
-                ]);
-    		expect("controller id should be 'user'", $controller->id == 'user' )->true();
+        Yii::$app->request->setBodyParams([1,2]);
+
+    	$this->specify('Remove a AR with single primary key', function () {
+    		$action = new BatchRemoveAction("batch-remove", null, ['modelClass'=>'tests\unit\models\User']);
+            $i = $action->run();
+    		expect("Number of deleted records should be 2: ", $i == 2)->true();
     	});
     }
 }
