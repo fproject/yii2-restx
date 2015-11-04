@@ -45,8 +45,8 @@ class BatchRemoveActionTest extends TestCase
 
     	$this->specify('Remove a AR with single primary key', function () {
     		$action = new BatchRemoveAction("batch-remove", null, ['modelClass'=>'tests\unit\models\User']);
-            $i = $action->run();
-    		expect("Number of deleted records should be 2: ", $i == 5)->true();
+            $n = $action->run();
+    		expect("Number of deleted records should be 2: ", $n)->equals(3);
     	});
     }
 }
