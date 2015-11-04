@@ -29,9 +29,18 @@ class m150212_091806_create_tables_and_data extends Migration
             'accessToken' => Schema::TYPE_STRING,
         ]);
 
+        $this->createTable('user_department_assignment', [
+            'userId' => "int(11)",
+            'departmentId' => "int(11)",
+        ]);
+
         $this->addForeignKey('fk_user_profile','user','profileId','user_profile','id');
 
         $this->addForeignKey('fk_user_department','user','departmentId','department','id');
+
+        $this->addForeignKey('fk_department_assignment_user','user_department_assignment','userId','user','id');
+
+        $this->addForeignKey('fk_department_assignment_department','user_department_assignment','departmentId','department','id');
 
         $data=[];
 

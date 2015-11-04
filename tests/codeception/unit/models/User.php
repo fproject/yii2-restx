@@ -1,9 +1,11 @@
 <?php
 
-namespace tests\unit\models;
+namespace tests\codeception\unit\models;
 
 use Yii;
-class User extends \tests\unit\models\base\User implements \yii\web\IdentityInterface
+use yii\web\IdentityInterface;
+
+class User extends \tests\codeception\unit\models\base\User implements IdentityInterface
 {
     public $authKey;
     public $accessToken;

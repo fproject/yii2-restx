@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\unit\models\base;
+namespace tests\codeception\unit\models\base;
 
 use Yii;
 

@@ -3,7 +3,7 @@ coverage:
     enabled: true
     white_list:
         include:
-            - ./codeception/unit/workflow/*
+            - ./codeception/unit/models/*
     blacklist:
         include:
             - ../vendor/*
