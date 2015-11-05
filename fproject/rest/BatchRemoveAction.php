@@ -51,7 +51,7 @@ class BatchRemoveAction extends Action
         $cnt = count($pks);
         if($cnt > 1 || $cnt == 0)
         {
-            return DbHelper::batchDelete($modelCls::tableName(), $pks);
+            return DbHelper::batchDelete($modelCls::tableName(), $ids);
         }
         else
         {
