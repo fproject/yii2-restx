@@ -19,6 +19,7 @@
 
 namespace fproject\rest;
 
+use fproject\components\DbHelper;
 use Yii;
 use yii\base\Model;
 use yii\db\ActiveRecord;
@@ -47,8 +48,17 @@ class BatchRemoveAction extends Action
         /* @var $modelCls ActiveRecord */
         $modelCls = new $this->modelClass;
         $pks = $modelCls::primaryKey();
-        $condition = [];
-        $condition[implode(',',$pks)] = $ids;
-        return $modelCls::deleteAll($condition);
+        $cnt = count($pks);
+        if($cnt > 1)
+        {
+            return DbHelper::batchDelete($modelCls::tableName(), $pks);
+        }
+        elseif($cnt == 1)
+        {
+            $condition = [];
+            $condition[$pks[0]] = $ids;
+            return $modelCls::deleteAll($condition);
+        }
+        return 0;
     }
 }
