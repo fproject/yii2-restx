@@ -39,8 +39,8 @@ class BatchRemoveAction extends Action
 
 
     /**
-     * Saves or updates a model according to the primary key values.
-     * @return \yii\db\ActiveRecordInterface the model being updated
+     * Delete a list of models according to the primary key values.
+     * @return int the number of deleted models
      */
     public function run()
     {
