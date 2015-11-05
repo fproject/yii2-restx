@@ -46,7 +46,7 @@ class BatchRemoveActionTest extends TestCase
     	$this->specify('Remove a AR with single primary key', function () {
     		$action = new BatchRemoveAction("batch-remove", null, ['modelClass'=>'tests\codeception\unit\models\User']);
             $n = $action->run();
-    		expect("Number of deleted records should be 2: ", $n)->equals(3);
+    		expect("Number of deleted records should be 3: ", $n)->equals(3);
     	});
     }
 
@@ -65,9 +65,9 @@ class BatchRemoveActionTest extends TestCase
         Yii::$app->request->setBodyParams($ids);
 
         $this->specify('Remove a AR with single primary key', function () {
-            $action = new BatchRemoveAction("batch-remove", null, ['modelClass'=>'tests\codeception\unit\models\User']);
+            $action = new BatchRemoveAction("batch-remove", null, ['modelClass'=>'tests\codeception\unit\models\base\UserDepartmentAssignment']);
             $n = $action->run();
-            expect("Number of deleted records should be 2: ", $n)->equals(3);
+            expect("Number of deleted records should be 2: ", $n)->equals(2);
         });
     }
 }
