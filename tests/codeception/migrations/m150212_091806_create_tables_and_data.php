@@ -95,12 +95,14 @@ class m150212_091806_create_tables_and_data extends Migration
         $data=[];
         for($i=0; $i<500;$i++)
         {
-            $data[] = ['profileId'=>$i+3,
+            $data[] = [
+                'profileId'=>$i+3,
                 'departmentId'=> 1+ ($i % 100),
                 'username' => 'demo_no_'.$i,
                 'password' => 'demo_no_'.$i,
                 'authKey' => "test_$i _key",
-                'accessToken' => 'test_$i _token',];
+                'accessToken' => 'test_$i _token'
+            ];
         }
 
         DbHelper::insertMultiple('user', $data);

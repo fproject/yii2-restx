@@ -53,13 +53,25 @@ class BatchRemoveActionTest extends TestCase
     public function testBatchRemoveForCompositePrimaryKey()
     {
         $ids = [];
+
+        $depart = new UserDepartmentAssignment();
+        $depart->userId = 1;
+        $depart->departmentId = 2;
+        $depart->save(false);
+        $ids[] = ['userId' => $depart->userId,'departmentId'=>$depart->departmentId];
+
+        $depart = new UserDepartmentAssignment();
+        $depart->userId = 3;
+        $depart->departmentId = 5;
+        $depart->save(false);
+        $ids[] = ['departmentId'=>$depart->departmentId,'userId' => $depart->userId];
+
         for($i=0; $i < 2; $i++)
         {
             $depart = new UserDepartmentAssignment();
-            $depart->userId = $i;
+            $depart->userId = $i+1;
             $depart->departmentId = $i * 2;
-            $depart->save(false);
-            $ids[] = ['userId' => $depart->userId,'departmentId'=>$depart->departmentId];
+
         }
 
         Yii::$app->request->setBodyParams($ids);
