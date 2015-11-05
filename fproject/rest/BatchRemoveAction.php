@@ -49,16 +49,15 @@ class BatchRemoveAction extends Action
         $modelCls = new $this->modelClass;
         $pks = $modelCls::primaryKey();
         $cnt = count($pks);
-        if($cnt > 1)
+        if($cnt > 1 || $cnt == 0)
         {
             return DbHelper::batchDelete($modelCls::tableName(), $pks);
         }
-        elseif($cnt == 1)
+        else
         {
             $condition = [];
             $condition[$pks[0]] = $ids;
             return $modelCls::deleteAll($condition);
         }
-        return 0;
     }
 }
