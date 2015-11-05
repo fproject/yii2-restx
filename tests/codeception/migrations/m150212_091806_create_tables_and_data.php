@@ -46,7 +46,7 @@ class m150212_091806_create_tables_and_data extends Migration
 
         for($i=0; $i<100;$i++)
         {
-            $data[] = ['name' => 'Department No.'.$i];
+            $data[] = ['id'=>($i+1),'name' => 'Department No.'.$i];
         }
 
         DbHelper::insertMultiple('department', $data);
@@ -76,6 +76,7 @@ class m150212_091806_create_tables_and_data extends Migration
 
 
         $this->insert('user', [
+            'id' => 1,
             'profileId'=>1,
             'username' => 'admin',
             'password' => 'admin',
@@ -83,6 +84,7 @@ class m150212_091806_create_tables_and_data extends Migration
             'accessToken' => '100-token',
         ]);
         $this->insert('user', [
+            'id' => 2,
             'profileId'=>2,
             'username' => 'demo',
             'password' => 'demo',

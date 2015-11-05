@@ -18,18 +18,19 @@
 ///////////////////////////////////////////////////////////////////////////////
 namespace tests\unit\rest;
 
+use tests\codeception\unit\models\base\UserDepartmentAssignment;
 use tests\codeception\unit\models\User;
 use fproject\rest\BatchRemoveAction;
 use Yii;
 use yii\codeception\TestCase;
+use \Codeception\Specify;
 
 class BatchRemoveActionTest extends TestCase
 {
-	use \Codeception\Specify;
+	use Specify;
 
     public function testBatchRemoveForSinglePrimaryKey()
     {
-        $users = [];
         $ids = [];
         for($i=0; $i < 3; $i++)
         {
@@ -47,5 +48,26 @@ class BatchRemoveActionTest extends TestCase
             $n = $action->run();
     		expect("Number of deleted records should be 2: ", $n)->equals(3);
     	});
+    }
+
+    public function testBatchRemoveForCompositePrimaryKey()
+    {
+        $ids = [];
+        for($i=0; $i < 2; $i++)
+        {
+            $depart = new UserDepartmentAssignment();
+            $depart->userId = $i;
+            $depart->departmentId = $i * 2;
+            $depart->save(false);
+            $ids[] = ['userId' => $depart->userId,'departmentId'=>$depart->departmentId];
+        }
+
+        Yii::$app->request->setBodyParams($ids);
+
+        $this->specify('Remove a AR with single primary key', function () {
+            $action = new BatchRemoveAction("batch-remove", null, ['modelClass'=>'tests\codeception\unit\models\User']);
+            $n = $action->run();
+            expect("Number of deleted records should be 2: ", $n)->equals(3);
+        });
     }
 }
