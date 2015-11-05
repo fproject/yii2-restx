@@ -47,14 +47,17 @@ class BatchSaveAction extends Action
     public function run()
     {
         $modelArr = Yii::$app->getRequest()->getBodyParams();
+
         $models = [];
-        foreach($modelArr as $ma)
+        foreach($modelArr as $m)
         {
             /* @var $model ActiveRecord */
             $model = new $this->modelClass([
                 'scenario' => $this->scenario,
             ]);
-            $model->setAttributes($ma, false);
+            $model->load($m, '');
+            if(array_key_exists("_isInserting", $m) && $model->hasProperty("_isInserting"))
+                $model->{"_isInserting"} = $m["_isInserting"];
             $models[] = $model;
         }
 
