@@ -24,6 +24,7 @@ use Yii;
 use yii\base\Model;
 use yii\db\ActiveRecord;
 use yii\rest\Action;
+use yii\web\ServerErrorHttpException;
 
 /**
  * BatchSaveAction implements the API endpoint for batch-saving (inserting or updating) models.
@@ -43,6 +44,8 @@ class BatchSaveAction extends Action
     /**
      * Saves or updates a model according to the primary key values.
      * @return \yii\db\ActiveRecordInterface the model being updated
+     * @throws ServerErrorHttpException
+     * @throws \yii\base\InvalidConfigException
      */
     public function run()
     {
@@ -55,7 +58,12 @@ class BatchSaveAction extends Action
             $model = new $this->modelClass([
                 'scenario' => $this->scenario,
             ]);
-            $model->load($m, '');
+
+            if(!$this->loadModel($model, $m))
+            {
+                throw new ServerErrorHttpException('Failed to batch-save the models: invalid data');
+            }
+
             if(array_key_exists("_isInserting", $m) && $model->hasProperty("_isInserting"))
                 $model->{"_isInserting"} = $m["_isInserting"];
             $models[] = $model;

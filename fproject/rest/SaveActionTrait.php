@@ -18,6 +18,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 namespace fproject\rest;
+use yii\db\ActiveRecord;
 
 /**
  * The SaveActionTrait trait represents the common method set for SaveAction and BatchSaveAction
@@ -49,5 +50,31 @@ trait SaveActionTrait {
         else
             $attributes = null;
         return $attributes;
+    }
+
+    /**
+     * Populate model data
+     * @param ActiveRecord $model the model to populate
+     * @param array $modelData
+     * @return bool true if success
+     */
+    public function loadModel($model, $modelData)
+    {
+        if(empty($modelData))
+            return false;
+
+        $attributes = $model->attributes();
+
+        $b = false;
+        foreach($attributes as $attrName)
+        {
+            if(array_key_exists($attrName, $modelData))
+            {
+                $model->setAttribute($attrName, $modelData[$attrName]);
+                $b = true;
+            }
+        }
+
+        return $b;
     }
 }
