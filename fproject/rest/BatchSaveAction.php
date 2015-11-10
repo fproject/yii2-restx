@@ -69,6 +69,10 @@ class BatchSaveAction extends Action
             $models[] = $model;
         }
 
+        if ($this->checkAccess) {
+            call_user_func($this->checkAccess, $this->id, $models);
+        }
+
         $attributes = $this->getSavingFieldsFromRequest();
         if(is_null($attributes))
             $attributes = [];

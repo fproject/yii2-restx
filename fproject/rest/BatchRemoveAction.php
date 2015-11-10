@@ -47,6 +47,11 @@ class BatchRemoveAction extends Action
         $ids = Yii::$app->getRequest()->getBodyParams();
         /* @var $modelCls ActiveRecord */
         $modelCls = new $this->modelClass;
+
+        if ($this->checkAccess) {
+            call_user_func($this->checkAccess, $this->id, $modelCls);
+        }
+
         $pks = $modelCls::primaryKey();
         $cnt = count($pks);
         if($cnt > 1 || $cnt == 0)

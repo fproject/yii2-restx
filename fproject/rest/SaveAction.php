@@ -71,6 +71,10 @@ class SaveAction extends Action
             throw new ServerErrorHttpException('Failed to save the model: invalid data');
         }
 
+        if ($this->checkAccess) {
+            call_user_func($this->checkAccess, $this->id, $model);
+        }
+
         if(array_key_exists("_isInserting", $data) && $model->hasProperty("_isInserting"))
         {
             $isNew = (bool)$bodyData["_isInserting"];
