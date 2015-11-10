@@ -65,26 +65,34 @@ class SaveAction extends Action
         }
         else
             $data = $bodyData;
-        $model->load($data, '');
 
-        $keys = $model->getPrimaryKey(true);
-
-        $isNew = false;
-        foreach($keys as $name=>$value)
+        if(!$this->loadModel($model, $data))
         {
-            if(isset($bodyData[$name]))
+            throw new ServerErrorHttpException('Failed to save the model: invalid data');
+        }
+
+        if(array_key_exists("_isInserting", $data) && $model->hasProperty("_isInserting"))
+        {
+            $isNew = (bool)$bodyData["_isInserting"];
+        }
+        else
+        {
+            $keys = $model->getPrimaryKey(true);
+            $isNew = false;
+            foreach($keys as $name=>$value)
             {
-                $model->$name = $bodyData[$name];
-                $keys[$name] = $bodyData[$name];
+                if(empty($bodyData[$name]))
+                {
+                    $isNew = true;
+                    break;
+                }
             }
-            else
-                $isNew = true;
         }
 
         if($isNew)
             $model->setOldAttributes(null);
         else
-            $model->setOldAttributes($keys);
+            $model->setOldAttributes([]);
 
         if ($this->checkAccess) {
             call_user_func($this->checkAccess, $this->id, $model);
