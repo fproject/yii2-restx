@@ -48,9 +48,9 @@ class ActiveControllerTest extends TestCase
             $depart->save(false);
             $ids = ['userId' => $depart->userId,'departmentId'=>$depart->departmentId];
 
-            $controller = new ActiveController('user', Yii::$app,
+            $controller = new ActiveController('user-department-assignments', Yii::$app,
                 [
-                    'modelClass' => 'tests\unit\models\User'
+                    'modelClass' => 'tests\codeception\unit\models\base\UserDepartmentAssignment'
                 ]);
 
             $action = new DeleteAction("remove", null, ['modelClass'=>'tests\codeception\unit\models\base\UserDepartmentAssignment']);
