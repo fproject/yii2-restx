@@ -48,6 +48,8 @@ class ActiveControllerTest extends TestCase
             $depart->save(false);
             $ids = ['userId' => $depart->userId,'departmentId'=>$depart->departmentId];
 
+            Yii::$app->request->setBodyParams($ids);
+
             $action = new DeleteAction("remove", null, ['modelClass'=>'tests\codeception\unit\models\base\UserDepartmentAssignment']);
             $action->runWithParams($ids);
 
