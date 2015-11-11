@@ -42,6 +42,7 @@ class ActiveControllerTest extends TestCase
     public function testRemoveForCompositePrimaryKey()
     {
         $this->specify('Remove a AR with composite primary key', function () {
+            UserDepartmentAssignment::deleteAll(['userId' => 1,'departmentId'=>2]);
             $depart = new UserDepartmentAssignment();
             $depart->userId = 1;
             $depart->departmentId = 2;
