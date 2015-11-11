@@ -59,6 +59,6 @@ class ActiveControllerTest extends TestCase
 
             $model = UserDepartmentAssignment::findOne(['userId' => 300,'departmentId'=>99]);
             expect("The result of findOne() after deleting should be null: ", $model)->null();
-        });
+        },['throws' => ['yii\web\NotFoundHttpException'] ]);
     }
 }
