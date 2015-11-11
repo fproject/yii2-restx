@@ -19,8 +19,10 @@
 namespace tests\unit\rest;
 
 use fproject\rest\ActiveController;
+use tests\codeception\unit\models\base\UserDepartmentAssignment;
 use Yii;
 use yii\codeception\TestCase;
+use yii\rest\DeleteAction;
 
 class ActiveControllerTest extends TestCase
 {
@@ -35,5 +37,22 @@ class ActiveControllerTest extends TestCase
                 ]);
     		expect("controller id should be 'user'", $controller->id == 'user' )->true();
     	});
+    }
+
+    public function testRemoveForCompositePrimaryKey()
+    {
+        $this->specify('Remove a AR with single primary key', function () {
+            $depart = new UserDepartmentAssignment();
+            $depart->userId = 1;
+            $depart->departmentId = 2;
+            $depart->save(false);
+            $ids = ['userId' => $depart->userId,'departmentId'=>$depart->departmentId];
+
+            $action = new DeleteAction("remove", null, ['modelClass'=>'tests\codeception\unit\models\base\UserDepartmentAssignment']);
+            $action->runWithParams($ids);
+
+            $model = UserDepartmentAssignment::findOne($ids);
+            expect("The result of findOne() after deleting should be null: ", $model)->null();
+        });
     }
 }
