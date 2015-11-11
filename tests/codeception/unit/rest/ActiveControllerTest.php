@@ -46,7 +46,6 @@ class ActiveControllerTest extends TestCase
             $depart->userId = 1;
             $depart->departmentId = 2;
             $depart->save(false);
-            $ids = ['userId' => $depart->userId,'departmentId'=>$depart->departmentId];
 
             $controller = new ActiveController('user-department-assignments', Yii::$app,
                 [
@@ -55,9 +54,9 @@ class ActiveControllerTest extends TestCase
 
             $action = new DeleteAction("remove", null, ['modelClass'=>'tests\codeception\unit\models\base\UserDepartmentAssignment']);
             $action->controller = $controller;
-            $action->runWithParams(['id'=>$ids]);
+            $action->runWithParams(['id'=>'{"userId": '.$depart->userId.',"departmentId" : '.$depart->departmentId.'}']);
 
-            $model = UserDepartmentAssignment::findOne($ids);
+            $model = UserDepartmentAssignment::findOne(['userId' => $depart->userId,'departmentId'=>$depart->departmentId]);
             expect("The result of findOne() after deleting should be null: ", $model)->null();
         });
     }
