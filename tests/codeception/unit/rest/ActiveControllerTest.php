@@ -42,10 +42,10 @@ class ActiveControllerTest extends TestCase
     public function testRemoveForCompositePrimaryKey()
     {
         $this->specify('Remove a AR with composite primary key', function () {
-            UserDepartmentAssignment::deleteAll(['userId' => 1,'departmentId'=>2]);
+            UserDepartmentAssignment::deleteAll(['userId' => 300,'departmentId'=>400]);
             $depart = new UserDepartmentAssignment();
-            $depart->userId = 1;
-            $depart->departmentId = 2;
+            $depart->userId = 300;
+            $depart->departmentId = 400;
             $depart->save(false);
 
             $controller = new ActiveController('user-department-assignments', Yii::$app,
