@@ -45,7 +45,7 @@ class ActiveControllerTest extends TestCase
             UserDepartmentAssignment::deleteAll(['userId' => 300,'departmentId'=>99]);
             $depart = new UserDepartmentAssignment();
             $depart->userId = 300;
-            $depart->departmentId = 400;
+            $depart->departmentId = 99;
             $depart->save(false);
 
             $controller = new ActiveController('user-department-assignments', Yii::$app,
