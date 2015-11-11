@@ -41,7 +41,7 @@ class ActiveControllerTest extends TestCase
 
     public function testRemoveForCompositePrimaryKey()
     {
-        $this->specify('Remove a AR with single primary key', function () {
+        $this->specify('Remove a AR with composite primary key', function () {
             $depart = new UserDepartmentAssignment();
             $depart->userId = 1;
             $depart->departmentId = 2;
@@ -55,7 +55,7 @@ class ActiveControllerTest extends TestCase
 
             $action = new DeleteAction("remove", null, ['modelClass'=>'tests\codeception\unit\models\base\UserDepartmentAssignment']);
             $action->controller = $controller;
-            $action->runWithParams($ids);
+            $action->runWithParams(['id'=>$ids]);
 
             $model = UserDepartmentAssignment::findOne($ids);
             expect("The result of findOne() after deleting should be null: ", $model)->null();
