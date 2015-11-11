@@ -42,11 +42,11 @@ class ActiveControllerTest extends TestCase
     public function testRemoveForCompositePrimaryKey()
     {
         $this->specify('Remove a AR with composite primary key', function () {
-            UserDepartmentAssignment::deleteAll(['userId' => 300,'departmentId'=>99]);
+            /*UserDepartmentAssignment::deleteAll(['userId' => 300,'departmentId'=>99]);
             $depart = new UserDepartmentAssignment();
             $depart->userId = 300;
             $depart->departmentId = 99;
-            $depart->save(false);
+            $depart->save(false);*/
 
             $controller = new ActiveController('user-department-assignments', Yii::$app,
                 [
@@ -55,9 +55,9 @@ class ActiveControllerTest extends TestCase
 
             $action = new DeleteAction("remove", null, ['modelClass'=>'tests\codeception\unit\models\base\UserDepartmentAssignment']);
             $action->controller = $controller;
-            $action->runWithParams(['id'=>'{"userId": '.$depart->userId.',"departmentId" : '.$depart->departmentId.'}']);
+            $action->runWithParams(['id'=>'{"userId": 300,"departmentId" : 99}']);
 
-            $model = UserDepartmentAssignment::findOne(['userId' => $depart->userId,'departmentId'=>$depart->departmentId]);
+            $model = UserDepartmentAssignment::findOne(['userId' => 300,'departmentId'=>99]);
             expect("The result of findOne() after deleting should be null: ", $model)->null();
         });
     }

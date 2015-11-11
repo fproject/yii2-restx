@@ -107,6 +107,11 @@ class m150212_091806_create_tables_and_data extends Migration
         }
 
         DbHelper::insertMultiple('user', $data);
+
+        $this->insert('user_department_assignment', [
+            'userId'=>300,
+            'departmentId' => 99,
+        ]);
     }
 
     public function down()
