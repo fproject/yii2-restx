@@ -69,6 +69,12 @@ use Yii;
  */
 class UrlRule extends \yii\rest\UrlRule
 {
+    /** @inheritdoc */
+    public $tokens = [
+        '{id}' => '<id:\\d[\\d,]*|{("\\w+"\\s*:\\s*"{0,1}\\d+"{0,1}\\s*,{0,1})+\\}|>',
+    ];
+
+    /** @inheritdoc */
     public $patterns = [
         'PUT,PATCH {id}' => 'update',
         'DELETE {id}' => 'delete',

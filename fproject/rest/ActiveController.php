@@ -48,6 +48,8 @@ namespace fproject\rest;
 
 
 use yii\base\Model;
+use yii\db\ActiveRecordInterface;
+use yii\web\NotFoundHttpException;
 
 class ActiveController extends \yii\rest\ActiveController
 {
@@ -124,6 +126,12 @@ class ActiveController extends \yii\rest\ActiveController
             'checkAccess' => [$this, 'checkAccess']
         ];
 
+        //Config 'findModel' callback for actions
+        foreach($actions as $key=>$action)
+        {
+            $actions[$key]['findModel'] = [$this, 'findModel'];
+        }
+
         return $actions;
     }
 
@@ -141,5 +149,49 @@ class ActiveController extends \yii\rest\ActiveController
         $verbs['delete'] = ['GET','DELETE'];
 
         return $verbs;
+    }
+
+    /**
+     * Returns the data model based on the primary key given.
+     * If the data model is not found, a 404 HTTP exception will be raised.
+     * @param string|array $id the ID of the model to be loaded. If the model has a composite primary key,
+     * the ID must be a string of the primary key values separated by commas.
+     * The order of the primary key values should follow that returned by the `primaryKey()` method
+     * of the model.
+     * @return ActiveRecordInterface the model found
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function findModel($id)
+    {
+        if(is_string($id) && !preg_match('/^\d[\d,]*$/', $id))
+        {
+            $id = json_decode($id, true);
+        }
+        /* @var $modelClass ActiveRecordInterface */
+        $modelClass = $this->modelClass;
+        $keys = $modelClass::primaryKey();
+        if (count($keys) > 1) {
+            if(is_array($id))
+            {
+                $model = $modelClass::findOne($id);
+            }
+            else
+            {
+                $values = explode(',', $id);
+                if (count($keys) === count($values)) {
+                    $model = $modelClass::findOne(array_combine($keys, $values));
+                }
+            }
+        } elseif ($id !== null) {
+            $model = $modelClass::findOne($id);
+        }
+
+        if (isset($model)) {
+            return $model;
+        } else {
+            if(is_array($id) || is_object($id))
+                $id = json_encode($id);
+            throw new NotFoundHttpException("Object not found: $id");
+        }
     }
 }
