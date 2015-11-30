@@ -60,6 +60,7 @@ trait SaveActionTrait {
      */
     public function loadModel($model, $modelData)
     {
+        $model->trigger('beforeLoad');
         if(empty($modelData))
             return false;
 
@@ -74,7 +75,7 @@ trait SaveActionTrait {
                 $b = true;
             }
         }
-
+        $model->trigger('afterLoad');
         return $b;
     }
 }
