@@ -94,9 +94,15 @@ class SaveAction extends Action
         }
 
         if($isNew)
+        {
             $model->setOldAttributes(null);
+        }
         else
-            $model->setOldAttributes([]);
+        {
+            if(!isset($keys))
+                $keys = $model->getPrimaryKey(true);
+            $model->setOldAttributes($keys);
+        }
 
         if ($this->checkAccess) {
             call_user_func($this->checkAccess, $this->id, $model);
