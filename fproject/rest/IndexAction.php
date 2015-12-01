@@ -20,9 +20,9 @@
 namespace fproject\rest;
 
 use Yii;
-use yii\base\InvalidParamException;
 use yii\db\ActiveQuery;
 use yii\helpers\Json;
+use yii\web\BadRequestHttpException;
 
 /**
  * IndexAction implements the API endpoint for viewing (listing) model(s).
@@ -79,7 +79,7 @@ class IndexAction extends \yii\rest\IndexAction{
                         }
                         else
                         {
-                            throw new InvalidParamException("Condition definition(s) not found: ".implode(',', $conditionKeys));
+                            throw new BadRequestHttpException("Condition definition(s) not found: ".implode(',', $conditionKeys));
                         }
                     }
                 }
