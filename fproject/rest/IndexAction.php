@@ -20,6 +20,7 @@
 namespace fproject\rest;
 
 use Yii;
+use yii\base\InvalidParamException;
 use yii\db\ActiveQuery;
 use yii\helpers\Json;
 
@@ -45,7 +46,7 @@ class IndexAction extends \yii\rest\IndexAction{
                 if(isset($this->controller) && $this->controller->useSecureSearch)
                 {
                     $conditionKeys = $this->getConditionKeys($criteria);
-                    if(isset($conditionKeys))
+                    if(isset($conditionKeys) && count($conditionKeys) > 0)
                     {
                         $c = $this->getConditionMapItem($conditionKeys, $params);
                         if(isset($c))
@@ -75,6 +76,10 @@ class IndexAction extends \yii\rest\IndexAction{
                                     $query->where($c, $params);
                                 }
                             }
+                        }
+                        else
+                        {
+                            throw new InvalidParamException("Condition definition(s) not found: ".implode(',', $conditionKeys));
                         }
                     }
                 }
@@ -132,6 +137,11 @@ class IndexAction extends \yii\rest\IndexAction{
         return null;
     }
 
+    /**
+     * Get condition keys from condition source
+     * @param $source
+     * @return array|null
+     */
     protected function getConditionKeys($source)
     {
         if(isset($source) && is_array($source))
