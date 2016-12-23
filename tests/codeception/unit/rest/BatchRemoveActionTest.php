@@ -18,16 +18,18 @@
 ///////////////////////////////////////////////////////////////////////////////
 namespace tests\unit\rest;
 
-use Codeception\Lib\DescriptiveTestCase;
+use Codeception\TestCase;
 use tests\codeception\unit\models\base\UserDepartmentAssignment;
 use tests\codeception\unit\models\User;
 use fproject\rest\BatchRemoveAction;
 use Yii;
 use \Codeception\Specify;
 
-class BatchRemoveActionTest extends DescriptiveTestCase
+class BatchRemoveActionTest extends TestCase
 {
 	use Specify;
+
+    public function getScenario(){}
 
     public function testBatchRemoveForSinglePrimaryKey()
     {
