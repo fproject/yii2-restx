@@ -61,7 +61,7 @@ trait SaveActionTrait {
     public function loadModel($model, $modelData)
     {
         $model->trigger('beforeLoad');
-        if(empty($modelData))
+        if(empty($modelData) || !is_array($modelData))
             return false;
 
         $attributes = $model->attributes();
