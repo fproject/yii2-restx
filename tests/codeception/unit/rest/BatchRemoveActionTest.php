@@ -25,7 +25,7 @@ use fproject\rest\BatchRemoveAction;
 use Yii;
 use \Codeception\Specify;
 
-class BatchRemoveActionTest extends TestCase
+class BatchRemoveActionTest extends TestCase\Test
 {
 	use Specify;
 
