@@ -1,7 +1,7 @@
 <?php
 ///////////////////////////////////////////////////////////////////////////////
 //
-// © Copyright f-project.net 2010-present.
+// ï¿½ Copyright f-project.net 2010-present.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,13 +18,13 @@
 ///////////////////////////////////////////////////////////////////////////////
 namespace tests\unit\rest;
 
+use Codeception\Lib\DescriptiveTestCase;
 use fproject\rest\ActiveController;
 use tests\codeception\unit\models\base\UserDepartmentAssignment;
 use Yii;
-use yii\codeception\TestCase;
 use yii\rest\DeleteAction;
 
-class ActiveControllerTest extends TestCase
+class ActiveControllerTest extends DescriptiveTestCase
 {
 	use \Codeception\Specify;
 

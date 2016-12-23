@@ -1,7 +1,7 @@
 <?php
 ///////////////////////////////////////////////////////////////////////////////
 //
-// © Copyright f-project.net 2010-present.
+// ï¿½ Copyright f-project.net 2010-present.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,14 +18,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 namespace tests\unit\rest;
 
+use Codeception\Lib\DescriptiveTestCase;
 use tests\codeception\unit\models\base\UserDepartmentAssignment;
 use tests\codeception\unit\models\User;
 use fproject\rest\BatchRemoveAction;
 use Yii;
-use yii\codeception\TestCase;
 use \Codeception\Specify;
 
-class BatchRemoveActionTest extends TestCase
+class BatchRemoveActionTest extends DescriptiveTestCase
 {
 	use Specify;
 
