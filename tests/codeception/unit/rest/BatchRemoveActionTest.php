@@ -29,8 +29,6 @@ class BatchRemoveActionTest extends TestCase\Test
 {
 	use Specify;
 
-    public function getScenario(){}
-
     public function testBatchRemoveForSinglePrimaryKey()
     {
         $ids = [];

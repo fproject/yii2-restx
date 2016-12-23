@@ -29,8 +29,6 @@ class ActiveControllerTest extends TestCase\Test
 {
 	use Specify;
 
-    public function getScenario(){}
-
     public function testActions001()
     {
     	$this->specify('check ActiveControllerTest\'s actions', function () {
