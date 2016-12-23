@@ -18,16 +18,15 @@
 ///////////////////////////////////////////////////////////////////////////////
 namespace tests\unit\rest;
 
-use Codeception\Specify;
-use Codeception\TestCase;
 use fproject\rest\ActiveController;
 use tests\codeception\unit\models\base\UserDepartmentAssignment;
 use Yii;
+use yii\codeception\TestCase;
 use yii\rest\DeleteAction;
 
-class ActiveControllerTest extends TestCase\Test
+class ActiveControllerTest extends TestCase
 {
-	use Specify;
+	use \Codeception\Specify;
 
     public function testActions001()
     {

@@ -18,14 +18,14 @@
 ///////////////////////////////////////////////////////////////////////////////
 namespace tests\unit\rest;
 
-use Codeception\TestCase;
 use tests\codeception\unit\models\base\UserDepartmentAssignment;
 use tests\codeception\unit\models\User;
 use fproject\rest\BatchRemoveAction;
 use Yii;
+use yii\codeception\TestCase;
 use \Codeception\Specify;
 
-class BatchRemoveActionTest extends TestCase\Test
+class BatchRemoveActionTest extends TestCase
 {
 	use Specify;
 
