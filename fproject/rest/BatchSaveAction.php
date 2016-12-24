@@ -43,7 +43,10 @@ class BatchSaveAction extends Action
 
     /**
      * Saves or updates a model according to the primary key values.
-     * @return \yii\db\ActiveRecordInterface the model being updated
+     * @return \stdClass An instance of stdClass that may have one of the following fields:
+     * - The 'lastId' field is the last model ID (auto-incremental primary key) inserted.
+     * - The 'insertCount' is the number of rows inserted.
+     * - The 'updateCount' is the number of rows updated.
      * @throws ServerErrorHttpException
      * @throws \yii\base\InvalidConfigException
      */
@@ -52,7 +55,8 @@ class BatchSaveAction extends Action
         $modelArr = Yii::$app->getRequest()->getBodyParams();
 
         $models = [];
-        foreach($modelArr as $m)
+        $saveModes = [];
+        foreach($modelArr as $index=>$m)
         {
             /* @var $model ActiveRecord */
             $model = new $this->modelClass([
@@ -64,9 +68,12 @@ class BatchSaveAction extends Action
                 throw new ServerErrorHttpException('Failed to batch-save the models: invalid data');
             }
 
-            if(array_key_exists("_isInserting", $m) && $model->hasProperty("_isInserting"))
-                $model->{"_isInserting"} = $m["_isInserting"];
-            $models[] = $model;
+            if(array_key_exists("_isInserting", $m))
+            {
+                $saveModes[$index] = (boolval($m["_isInserting"]) ? DbHelper::SAVE_MODE_INSERT_ALL : DbHelper::SAVE_MODE_UPDATE_ALL);
+            }
+
+            $models[$index] = $model;
         }
 
         if ($this->checkAccess) {
@@ -77,6 +84,6 @@ class BatchSaveAction extends Action
         if(is_null($attributes))
             $attributes = [];
 
-        return DbHelper::batchSave($models, $attributes);
+        return DbHelper::batchSave($models, $attributes, $saveModes);
     }
 }
