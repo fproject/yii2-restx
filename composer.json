@@ -21,11 +21,14 @@
       "yiisoft/yii2" : "*",
       "fproject/yii2-common" : "*"
     },
-    "require-dev" : {
-      "codeception/codeception" : "2.0.9",
-      "codeception/specify" : "*",
-      "codeception/verify" : "*",
-      "yiisoft/yii2-codeception" : "*"
+    "require-dev": {
+      "yiisoft/yii2-debug": "~2.0.0",
+      "yiisoft/yii2-gii": "~2.0.0",
+      "yiisoft/yii2-faker": "~2.0.0",
+
+      "codeception/base": "^2.2.3",
+      "codeception/verify": "~0.3.1",
+      "codeception/specify": "~0.4.3"
     },
     "config" : {
       "process-timeout" : 1800
