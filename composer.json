@@ -6,7 +6,7 @@
     "type": "yii2-extension",
     "license": "Apache License 2.0",
     "support" : {
-      "issues" : "https://github.com/fproject/yii2-restx/issues"
+        "issues" : "https://github.com/fproject/yii2-restx/issues"
     },
     "authors": [
         {
@@ -19,16 +19,16 @@
     "require" : {
         "php" : ">=5.6",
         "yiisoft/yii2" : "*",
-        "fproject/yii2-common" : "*",
-        "bower-asset/jquery": "*"
+        "fproject/yii2-common" : "*"
     },
     "require-dev" : {
-      "codeception/base": "^2.2.3",
-      "codeception/verify": "~0.3.1",
-      "codeception/specify": "~0.4.3"
+        "codeception/codeception" : "2.0.9",
+        "codeception/specify" : "*",
+        "codeception/verify" : "*",
+        "yiisoft/yii2-codeception" : "*"
     },
     "config" : {
-      "process-timeout" : 1800
+        "process-timeout" : 1800
     },
     "autoload": {
         "psr-4": {
