@@ -70,7 +70,7 @@ class BatchSaveAction extends Action
 
             if(array_key_exists("_isInserting", $m))
             {
-                $saveModes[$index] = (boolval($m["_isInserting"]) ? DbHelper::SAVE_MODE_INSERT : DbHelper::SAVE_MODE_UPDATE);
+                $saveModes[$index] = (boolval($m["_isInserting"]) ? DbHelper::SAVE_MODE_INSERT_ALL : DbHelper::SAVE_MODE_UPDATE_ALL);
             }
 
             $models[$index] = $model;

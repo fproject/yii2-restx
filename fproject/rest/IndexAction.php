@@ -20,6 +20,7 @@
 namespace fproject\rest;
 
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
 use yii\helpers\Json;
 use yii\web\BadRequestHttpException;
@@ -32,6 +33,13 @@ use yii\web\BadRequestHttpException;
  * @author Bui Sy Nguyen <nguyenbs@f-project.net>
  */
 class IndexAction extends \yii\rest\IndexAction{
+
+    /**
+     * Prepares the data provider that should return the requested collection of the models.
+     * @return ActiveDataProvider
+     * @throws BadRequestHttpException
+     * @throws \yii\base\InvalidConfigException
+     */
     protected function prepareDataProvider()
     {
         $dp = parent::prepareDataProvider();

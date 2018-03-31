@@ -41,6 +41,7 @@ class BatchRemoveAction extends Action
     /**
      * Delete a list of models according to the primary key values.
      * @return int the number of deleted models
+     * @throws \yii\base\InvalidConfigException
      */
     public function run()
     {

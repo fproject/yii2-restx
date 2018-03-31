@@ -43,6 +43,7 @@ class SaveAction extends Action
      * Saves or updates a model according to the primary key values.
      * @return \yii\db\ActiveRecordInterface the model being updated
      * @throws ServerErrorHttpException if there is any error when inserting/updating the model
+     * @throws \yii\base\InvalidConfigException
      */
     public function run()
     {
