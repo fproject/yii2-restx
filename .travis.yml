@@ -6,7 +6,7 @@ php:
 install:
   - composer self-update
   - composer global require "fxp/composer-asset-plugin:*"
-  - composer clear-cache
+  - composer require bower-asset/jquery.inputmask
   - composer update
   - composer info --installed
 before_script:
