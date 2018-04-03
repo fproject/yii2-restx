@@ -50,6 +50,10 @@ namespace fproject\rest;
 use yii\base\Model;
 use yii\db\ActiveRecordInterface;
 use yii\web\NotFoundHttpException;
+use yii\filters\auth\CompositeAuth;
+use yii\filters\auth\HttpBasicAuth;
+use yii\filters\auth\HttpBearerAuth;
+use yii\filters\auth\QueryParamAuth;
 
 class ActiveController extends \yii\rest\ActiveController
 {
@@ -193,5 +197,22 @@ class ActiveController extends \yii\rest\ActiveController
                 $id = json_encode($id);
             throw new NotFoundHttpException("Object not found: $id");
         }
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['authenticator'] = [
+            'class' => CompositeAuth::class,
+            'authMethods' => [
+                HttpBearerAuth::class,
+                HttpBasicAuth::class,
+                QueryParamAuth::class,
+            ],
+        ];
+        return $behaviors;
     }
 }
