@@ -50,11 +50,10 @@ class BatchSaveActionTest extends TestCase
 
             //expect("Number of inserted records should be 2: ", $ret->insertCount)->equals(2);
             $lastID =$ret->lastId;
-            expect("LastID must > 0: ".json_encode($lastID), $lastID)->greaterThan(0);
             $dept = Department::findOne(['id'=>$lastID]);
             expect("Checking second record: ", $dept->name)->equals('Dept 002');
             $dept = Department::findOne(['id'=>$lastID - 1]);
-            expect("Checking first record: ".json_encode($lastID), $dept->name)->equals('Dept 001');
+            expect("Checking first record: ".json_encode($ret), $dept->name)->equals('Dept 001');
         });
     }
 
