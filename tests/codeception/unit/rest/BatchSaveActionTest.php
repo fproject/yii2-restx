@@ -24,6 +24,7 @@ use tests\codeception\unit\models\base\UserDepartmentAssignment;
 use Yii;
 use yii\codeception\TestCase;
 use \Codeception\Specify;
+use yii\helpers\ArrayHelper;
 
 class BatchSaveActionTest extends TestCase
 {
@@ -36,14 +37,12 @@ class BatchSaveActionTest extends TestCase
         $dept = new Department();
         $dept->name = "Dept 001";
 
-        $depts[] = $dept;
-
         $dept = new Department();
         $dept->name = "Dept 002";
 
         $depts[] = $dept;
 
-        Yii::$app->request->setBodyParams($depts);
+        Yii::$app->request->setBodyParams(ArrayHelper::toArray($depts,['tests\codeception\unit\models\base\Department' => ['name']]));
 
         $this->specify('Save some ARs with single primary key', function () {
             $action = new BatchSaveAction("batch-save", null, ['modelClass'=>'tests\codeception\unit\models\User']);
@@ -75,7 +74,7 @@ class BatchSaveActionTest extends TestCase
 
         $departs[] = $depart;
 
-        Yii::$app->request->setBodyParams($departs);
+        Yii::$app->request->setBodyParams(ArrayHelper::toArray($departs,['tests\codeception\unit\models\base\Department' => ['userId', 'departmentId']]));
 
         $this->specify('Save some ARs with composite primary key', function () {
             $action = new BatchSaveAction("batch-save", null, ['modelClass'=>'tests\codeception\unit\models\base\UserDepartmentAssignment']);
