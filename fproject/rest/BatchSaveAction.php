@@ -49,6 +49,7 @@ class BatchSaveAction extends Action
      * - The 'updateCount' is the number of rows updated.
      * @throws ServerErrorHttpException
      * @throws \yii\base\InvalidConfigException
+     * @throws \yii\db\Exception
      */
     public function run()
     {
@@ -70,7 +71,7 @@ class BatchSaveAction extends Action
 
             if(array_key_exists("_isInserting", $m))
             {
-                $saveModes[$index] = (boolval($m["_isInserting"]) ? DbHelper::SAVE_MODE_INSERT_ALL : DbHelper::SAVE_MODE_UPDATE_ALL);
+                $saveModes[$index] = (boolval($m["_isInserting"]) ? DbHelper::SAVE_MODE_INSERT : DbHelper::SAVE_MODE_UPDATE);
             }
 
             $models[$index] = $model;
