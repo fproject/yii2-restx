@@ -19,9 +19,8 @@
 namespace tests\unit\rest;
 
 use fproject\rest\BatchSaveAction;
+use tests\codeception\unit\models\base\Department;
 use tests\codeception\unit\models\base\UserDepartmentAssignment;
-use tests\codeception\unit\models\User;
-use fproject\rest\BatchRemoveAction;
 use Yii;
 use yii\codeception\TestCase;
 use \Codeception\Specify;
@@ -32,31 +31,31 @@ class BatchSaveActionTest extends TestCase
 
     public function testBatchSaveForSinglePrimaryKey001()
     {
-        $users = [];
+        $depts = [];
 
-        $u = new User();
-        $u->username = "Jack 001";
+        $dept = new Department();
+        $dept->name = "Dept 001";
 
-        $users[] = $u;
+        $depts[] = $dept;
 
-        $u = new User();
-        $u->username = "Jack 002";
+        $dept = new Department();
+        $dept->name = "Dept 002";
 
-        $users[] = $u;
+        $depts[] = $dept;
 
-        Yii::$app->request->setBodyParams($users);
+        Yii::$app->request->setBodyParams($depts);
 
-        $this->specify('Remove a AR with single primary key', function () {
+        $this->specify('Save some ARs with single primary key', function () {
             $action = new BatchSaveAction("batch-save", null, ['modelClass'=>'tests\codeception\unit\models\User']);
             $ret = $action->run();
 
             expect("Number of inserted records should be 2: ", $ret->insertCount)->equals(2);
             $lastID =$ret->lastId;
             expect("LastID must > 0: ", $lastID)->greaterThan(0);
-            $u = User::findOne(['id'=>$lastID]);
-            expect("Checking second record: ", $u->username)->equals('Jack 002');
-            $u = User::findOne(['id'=>$lastID - 1]);
-            expect("Checking first record: ", $u->username)->equals('Jack 001');
+            $dept = Department::findOne(['id'=>$lastID]);
+            expect("Checking second record: ", $dept->name)->equals('Dept 002');
+            $dept = Department::findOne(['id'=>$lastID - 1]);
+            expect("Checking first record: ", $dept->name)->equals('Dept 001');
         });
     }
 
@@ -78,7 +77,7 @@ class BatchSaveActionTest extends TestCase
 
         Yii::$app->request->setBodyParams($departs);
 
-        $this->specify('Remove a AR with single primary key', function () {
+        $this->specify('Save some ARs with composite primary key', function () {
             $action = new BatchSaveAction("batch-save", null, ['modelClass'=>'tests\codeception\unit\models\base\UserDepartmentAssignment']);
             $ret = $action->run();
             expect("Number of inserted records should be 2: ", $ret->insertCount)->equals(2);
