@@ -45,7 +45,7 @@ class BatchSaveActionTest extends TestCase
         Yii::$app->request->setBodyParams(ArrayHelper::toArray($depts,['tests\codeception\unit\models\base\Department' => ['id', 'name']]));
 
         $this->specify('Save some ARs with single primary key', function () {
-            $action = new BatchSaveAction("batch-save", null, ['modelClass'=>'tests\codeception\unit\models\User']);
+            $action = new BatchSaveAction("batch-save", null, ['modelClass'=>'tests\codeception\unit\models\base\Department']);
             $ret = $action->run();
             //expect("Number of inserted records should be 2: ", $ret->insertCount)->equals(2);
             $lastID =$ret->lastId;
@@ -75,7 +75,7 @@ class BatchSaveActionTest extends TestCase
 
         $departs[] = $depart;
 
-        Yii::$app->request->setBodyParams(ArrayHelper::toArray($departs,['tests\codeception\unit\models\base\Department' => ['userId', 'departmentId']]));
+        Yii::$app->request->setBodyParams(ArrayHelper::toArray($departs,['tests\codeception\unit\models\base\UserDepartmentAssignment' => ['userId', 'departmentId']]));
 
         $this->specify('Save some ARs with composite primary key', function () {
             $action = new BatchSaveAction("batch-save", null, ['modelClass'=>'tests\codeception\unit\models\base\UserDepartmentAssignment']);
