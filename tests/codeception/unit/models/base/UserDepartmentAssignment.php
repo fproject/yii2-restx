@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $userId
  * @property integer $departmentId
+ * @property string $description
  *
  * @property User $user
  * @property Department $department
@@ -30,6 +31,7 @@ class UserDepartmentAssignment extends \yii\db\ActiveRecord
     {
         return [
             [['userId', 'departmentId'], 'integer'],
+            [['description'], 'string', 'max' => 255]
         ];
     }
 
@@ -41,6 +43,7 @@ class UserDepartmentAssignment extends \yii\db\ActiveRecord
         return [
             'userId' => 'User ID',
             'departmentId' => 'Department Id',
+            'description' => 'Description',
         ];
     }
 
