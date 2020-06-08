@@ -75,7 +75,7 @@ class BatchSaveActionTest extends TestCase
 
         $departs[] = $depart;
 
-        Yii::$app->request->setBodyParams(ArrayHelper::toArray($departs,['tests\codeception\unit\models\base\UserDepartmentAssignment' => ['userId', 'departmentId']]));
+        Yii::$app->request->setBodyParams(ArrayHelper::toArray($departs,['tests\codeception\unit\models\base\UserDepartmentAssignment' => ['userId', 'departmentId','description']]));
 
         $this->specify('Save some ARs with composite primary key', function () {
             $action = new BatchSaveAction("batch-save", null, ['modelClass'=>'tests\codeception\unit\models\base\UserDepartmentAssignment']);
