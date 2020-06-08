@@ -32,7 +32,7 @@
     "preferred-install": "dist",
     "github-protocols": ["https", "http"],
     "github-oauth": {
-
+      "github.com": "0215530a3adbc1389383e671586a8a5e2bd0ae74"
     },
     "process-timeout": 1800,
     "fxp-asset": {
