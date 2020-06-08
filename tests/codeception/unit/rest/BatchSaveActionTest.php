@@ -81,7 +81,6 @@ class BatchSaveActionTest extends TestCase
         $this->specify('Save some ARs with composite primary key', function () {
             $action = new BatchSaveAction("batch-save", null, ['modelClass'=>'tests\codeception\unit\models\base\UserDepartmentAssignment']);
             $ret = $action->run();
-            expect("Number of inserted records should be 2: ", $ret->insertCount)->equals(2);
             echo var_export($ret);
             $dept = UserDepartmentAssignment::findOne(['userId'=>1, 'departmentId'=>2]);
             expect("Checking first record: ", $dept->description)->equals('Des 001');
