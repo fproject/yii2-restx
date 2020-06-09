@@ -23,10 +23,9 @@
     "ext-json": "*"
   },
   "require-dev" : {
-    "codeception/codeception" : "2.0.9",
-    "codeception/specify" : "*",
-    "codeception/verify" : "*",
-    "yiisoft/yii2-codeception" : "*"
+    "codeception/codeception" : "^4.0",
+    "codeception/specify" : "~0.4.6",
+    "codeception/verify" : "~0.5.0 || ~1.1.0"
   },
   "config" : {
     "preferred-install": "dist",

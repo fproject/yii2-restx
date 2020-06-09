@@ -18,10 +18,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 namespace tests\unit\rest;
 
+use Codeception\PHPUnit\TestCase;
 use fproject\rest\ActiveController;
 use tests\codeception\unit\models\base\UserDepartmentAssignment;
 use Yii;
-use yii\codeception\TestCase;
 use yii\rest\DeleteAction;
 
 class ActiveControllerTest extends TestCase

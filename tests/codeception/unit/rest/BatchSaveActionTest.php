@@ -18,11 +18,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 namespace tests\unit\rest;
 
+use Codeception\PHPUnit\TestCase;
 use fproject\rest\BatchSaveAction;
 use tests\codeception\unit\models\base\Department;
 use tests\codeception\unit\models\base\UserDepartmentAssignment;
 use Yii;
-use yii\codeception\TestCase;
 use \Codeception\Specify;
 use yii\helpers\ArrayHelper;
 
